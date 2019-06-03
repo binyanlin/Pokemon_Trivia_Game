@@ -43,18 +43,22 @@ displayer();
 
 let correctCounter = 0;
 let wrongCounter = 0;
-
+let buttonClicked = false;
 // Guess event
 $(".btn").on("click", function() {
-  let choice = parseInt($(this).attr("id"));
-  if (selector[choice]) {
-    $(".comment").html(`<p>Correct!<p>`);
-    correctCounter++;
-    console.log("right: " + correctCounter);
-  } else {
-    $(".comment").html(`<p>You are wrong!</p>`);
-    wrongCounter++;
-    console.log("wrong " + wrongCounter);
+  if (buttonClicked === false) {
+    buttonClicked = true;
+    $(".pokeImg").removeAttr("id");
+    let choice = parseInt($(this).attr("id"));
+    if (selector[choice]) {
+      $(".comment").html(`<p>Correct!<p>`);
+      correctCounter++;
+      console.log("right: " + correctCounter);
+    } else {
+      $(".comment").html(`<p>You are wrong!</p>`);
+      wrongCounter++;
+      console.log("wrong: " + wrongCounter);
+    };
   };
 });
 // let queryURL = "https://pokeapi.co/api/v2/pokemon/" + pokeNum[0];
