@@ -7,8 +7,8 @@ let pokeNum = [];
 const pokePicker = function() {
   pokeNum = [];
   for (let i = 0; i < 4; i++) {
-    pokeNum.push(1 + Math.floor(Math.random()* 807)); //for all pokemon!
-    // pokeNum.push(1 + Math.floor(Math.random()* 151)); //for testing
+    // pokeNum.push(1 + Math.floor(Math.random()* 807)); //for all pokemon!
+    pokeNum.push(1 + Math.floor(Math.random()* 151)); //for testing
   };
 };
 
@@ -38,8 +38,11 @@ let buttonClicked = false;
 const displayer = function () {
   for (i = 0; i<selector.length; i++) {
     if (buttonClicked === false && selector[i]) {
-      // $(".pokePic").html(`<img class="pokeImg" src="https://pokeres.bastionbot.org/images/pokemon/${pokeNum[i]}.png"></img>`);
-      $(".pokePic").html(`<img class="pokeImg" src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/${pokeNum[i]}.png"></img>`);
+      $(".pokePic").html(`<img class="pokeImg" src="https://pokeres.bastionbot.org/images/pokemon/${pokeNum[i]}.png"></img>`);
+      // in case of 404 error, replace pokePic with backup URL
+      window.addEventListener("error", function() {
+        $(".pokePic").html(`<img class="pokeImg" src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/${pokeNum[i]}.png"></img>`);
+      }, true);
     } else if (buttonClicked === true && selector[i]) {
       $(".comment").append(`The pokemon is ${pokeList[pokeNum[i]]}\!`);
     };
