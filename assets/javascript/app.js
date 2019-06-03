@@ -48,7 +48,7 @@ const displayer = function () {
 let correctCounter = 0;
 let wrongCounter = 0;
 
-// function for resetting the game state for next round 
+// function for resetting the game state for each round 
 const nextRound = () => {
   pokePicker();
   roundSelect();
@@ -66,7 +66,11 @@ const gameCounter = () => {
     roundCount++;
     nextRound();
     console.log("round: " + roundCount);
-  }; //gameend stuff in else here
+  } else {
+    $(".main").hide();
+    $(".results").append(`<h4>Correct: ${correctCounter} times</h4>`)
+    $(".results").append(`<h4>Incorrect: ${wrongCounter} times</h4>`)
+  }
 };
 //game start
 nextRound();
