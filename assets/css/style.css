@@ -1,0 +1,10 @@
+.pokeImg {
+  width: 300px;
+  height: auto;
+}
+
+/* #silhouette {
+  -webkit-filter: grayscale(100%) brightness(0);
+  filter: grayscale(100%) brightness(0);
+  opacity: 0.6;
+} */
