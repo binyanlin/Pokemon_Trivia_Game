@@ -1,7 +1,6 @@
 $( document ).ready(function() {
 //============================[Starting Page]================================
 let gameStart = false;
-let gameEnd = false;
 let roundCount = 1;
 
 const gameState = function() {
@@ -19,10 +18,8 @@ const gameState = function() {
         $(".main").hide();
         $(".pokeStats").show();
       };
-  } else if (gameStart === true && roundCount >= 11) {
-    $(".main").hide();
-    $(".pokeStats").hide();
-    $(".results").show();
+  } else if (gameStart === true && roundCount === 11) {
+    gameEnd();
   };
 };
 
@@ -106,15 +103,11 @@ $(".startB").on("click", function() {
   };
 
   const gameCounter = () => {
-    if (roundCount < 10) {
+    if (roundCount <= 10) {
       roundCount++;
       nextRound();
       console.log("round: " + roundCount);
-    } else {
-      gameState();
-      $(".finalScore").append(`<h4>Correct: ${correctCounter} times</h4>`)
-      $(".finalScore").append(`<h4>Incorrect: ${wrongCounter} times</h4>`)
-    }
+    };
   };
 
   //game start
@@ -198,6 +191,45 @@ const pokeStats = function() {
       
     }); 
 };
-//============================================================
+//==========================[Results and Reset]==================================
+const gameEnd = function() {
+  $(".main").hide();
+  $(".pokeStats").hide();
+  $(".results").show();
+  $(".finalScore").append(`<h4>Correct: ${correctCounter} times</h4>`);
+  $(".finalScore").append(`<h4>Incorrect: ${wrongCounter} times</h4>`);
+  $(".profOak").append(`<img src="./assets/images/Professor_Oak.png"></img>`)
+  $(".rating").html(`<h3>Professor Oak's Rating</h3>`);
+  setTimeout(function() {$(".rating").html(`<h3>Professor Oak's Rating.</h3>`)}, 1000 * 2);
+  setTimeout(function() {$(".rating").html(`<h3>Professor Oak's Rating..</h3>`)}, 1000 * 3);
+  setTimeout(function() {$(".rating").html(`<h3>Professor Oak's Rating...</h3>`)}, 1000 * 4);
+  const ratingQuotes = 
+    {0: "Are you a Boy or a Girl?",
+    1: "You still have lots to do. Look for Pokémon in grassy areas!",
+    2: "You still need more Pokémon knowledge!",
+    3: "You still need more Pokémon knowledge!",
+    4: "You're trying--I can see that.",
+    5: "You're on the right track!",
+    6: "You've proven yourself capable. There's nothing to worry about.",
+    7: "Good, you're trying hard!",
+    8: "Outstanding! You've become a real pro at this!",
+    9: "Magnificent! You could become a Pokémon professor right now!",
+    10: "I have nothing left to say! You're the authority now!",
+    };
+  setTimeout(function() {
+    $(".rating").append(ratingQuotes[correctCounter]);
+  }, 1000 * 5);
+};
+
+
+
+
+
+
+
+
+
+
+//===============================================================
 //doc.ready close tag
 });
