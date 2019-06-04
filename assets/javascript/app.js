@@ -1,4 +1,4 @@
-$( document ).ready(function() {
+// $( document ).ready(function() {
 //============================[Starting Page]================================
 let gameStart = false;
 let roundCount = 1;
@@ -41,13 +41,13 @@ const decrement = () => {
     $(".comment").html(`<p>You ran out of time!</p>`);
     $(".pokeImg").removeAttr("id");
     buttonClicked = true;
-    wrongCounter++;
-    console.log("wrong: " + wrongCounter);
     displayer();
     setTimeout(function() {
       gameState();
       if (roundCount <= 10) {
         pokeStats();
+        wrongCounter++;
+        console.log("wrong: " + wrongCounter);
       };
     }, 1000 * 2);
   };
@@ -167,7 +167,9 @@ $(".startB").on("click", function() {
       // timer that resets everything, increases turn count by 1, and makes next question appear
       setTimeout(function() {
         gameState();
+        if (roundCount <=10) {
         pokeStats();
+        };
       }, 1000 * 2);
     };
   });
@@ -233,15 +235,16 @@ const gameEnd = function() {
   $(".main").hide();
   $(".pokeStats").hide();
   $(".results").show();
+  $(".title3").html(`<h1>Results!</h1>`);
   $(".finalScore").append(`<h4>Correct: ${correctCounter} times</h4>`);
   $(".finalScore").append(`<h4>Incorrect: ${wrongCounter} times</h4>`);
-  $(".profOak").append(`<img src="./assets/images/Professor_Oak.png"></img>`)
+  $(".profOak").html(`<img src="./assets/images/Professor_Oak.png"></img>`);
   $(".rating").html(`<h3>Professor Oak's Rating</h3>`);
   setTimeout(function() {$(".rating").html(`<h3>Professor Oak's Rating.</h3>`)}, 1000 * 2);
   setTimeout(function() {$(".rating").html(`<h3>Professor Oak's Rating..</h3>`)}, 1000 * 3);
   setTimeout(function() {$(".rating").html(`<h3>Professor Oak's Rating...</h3>`)}, 1000 * 4);
   const ratingQuotes = 
-    {0: "Are you a Boy or a Girl?",
+    {0: "You look more like you're ready for bed than Pokémon naming.",
     1: "You still have lots to do. Look for Pokémon in grassy areas!",
     2: "You still need more Pokémon knowledge!",
     3: "You still need more Pokémon knowledge!",
@@ -255,19 +258,24 @@ const gameEnd = function() {
     };
   setTimeout(function() {
     $(".rating").append(ratingQuotes[correctCounter]);
+    $(".restart").html(`<button type="button" class="restartB"><img src="./assets/images/pokeball.png"></img>Restart<button>`);
   }, 1000 * 5);
-  // add a reset button! empties out all divs, sets counter back to 1, turns button states back
 };
 
-
-
-
-
-
-
-
-
+// add a reset button! empties out all divs, sets counter back to 1, turns button states back
+$(document).on("click", ".restartB", function() {
+  gameStart = false;
+  roundCount = 1;
+  buttonClicked = false;
+  correctCounter = 0;
+  wrongCounter = 0;
+  $(".finalScore").empty();
+  $(".rating").empty();
+  $(".restart").empty();
+  gameState();
+  nextRound();
+});
 
 //===============================================================
 //doc.ready close tag
-});
+// });
