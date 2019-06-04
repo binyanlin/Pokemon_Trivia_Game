@@ -1,15 +1,16 @@
 // $( document ).ready(function() {
-//============================[Starting Page]================================
+//============================[Starting Page and Timer]================================
 let gameStart = false;
 let roundCount = 1;
+let totalRounds = 10;
 
 const gameState = function() {
-  if (gameStart === false && roundCount <= 10) {
+  if (gameStart === false && roundCount <= totalRounds) {
     $(".pregame").show();
     $(".main").hide();
     $(".results").hide();
     $(".pokeStats").hide();
-  } else if (gameStart === true && roundCount <= 10) {
+  } else if (gameStart === true && roundCount <= totalRounds) {
       if (buttonClicked === false) {
         $(".main").show();
         $(".pregame").hide();
@@ -18,7 +19,7 @@ const gameState = function() {
         $(".main").hide();
         $(".pokeStats").show();
       };
-  } else if (gameStart === true && roundCount === 11) {
+  } else if (gameStart === true && roundCount === (totalRounds + 1)) {
     gameEnd();
     gameStart = false;
   };
@@ -257,7 +258,8 @@ const gameEnd = function() {
     10: "I have nothing left to say! You're the authority now!",
     };
   setTimeout(function() {
-    $(".rating").append(ratingQuotes[correctCounter]);
+    let overallRating = Math.floor(correctCounter/totalRounds * 10);
+    $(".rating").append(ratingQuotes[overallRating]);
     $(".restart").html(`<button type="button" class="restartB"><img src="./assets/images/pokeball.png"></img>Restart<button>`);
   }, 1000 * 5);
 };
