@@ -1,3 +1,4 @@
+$( document ).ready(function() {
 //============================[Starting Page]================================
 let gameStart = false;
 let gameEnd = false;
@@ -5,14 +6,22 @@ let roundCount = 1;
 
 const gameState = function() {
   if (gameStart === false) {
-    $(".main").hide();
     $(".pregame").show();
-    $(".results").hide();
-  } else if (gameStart === true && roundCount < 10) {
-    $(".main").show();
-    $(".pregame").hide();
-  } else if (gameStart === true && roundCount === 10) {
     $(".main").hide();
+    $(".results").hide();
+    $(".pokeStats").hide();
+  } else if (gameStart === true && roundCount <= 10) {
+      if (buttonClicked === false) {
+        $(".main").show();
+        $(".pregame").hide();
+        $(".pokeStats").hide();
+      } else if (buttonClicked === true) {
+        $(".main").hide();
+        $(".pokeStats").show();
+      };
+  } else if (gameStart === true && roundCount >= 11) {
+    $(".main").hide();
+    $(".pokeStats").hide();
     $(".results").show();
   };
 };
@@ -63,6 +72,7 @@ $(".startB").on("click", function() {
   };
 
   let buttonClicked = false;
+  let roundAnswer;
   // silhouette displayer
   const displayer = function () {
     for (i = 0; i<selector.length; i++) {
@@ -72,6 +82,7 @@ $(".startB").on("click", function() {
         window.addEventListener("error", function() {
           $(".pokePic").html(`<img class="pokeImg" src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/${pokeNum[i]}.png"></img>`);
         }, true);
+        roundAnswer = pokeNum[i];
       } else if (buttonClicked === true && selector[i]) {
         $(".comment").append(`The pokemon is ${pokeList[pokeNum[i]]}\!`);
       };
@@ -105,7 +116,7 @@ $(".startB").on("click", function() {
       $(".finalScore").append(`<h4>Incorrect: ${wrongCounter} times</h4>`)
     }
   };
-  
+
   //game start
   nextRound();
   // Guess event
@@ -126,43 +137,67 @@ $(".startB").on("click", function() {
       displayer();
       // timer that resets everything, increases turn count by 1, and makes next question appear
       setTimeout(function() {
-        gameCounter();
-      }, 1000 * 1);
+        gameState();
+        pokeStats();
+      }, 1000 * 2);
     };
   });
-  // let queryURL = "https://pokeapi.co/api/v2/pokemon/" + pokeNum[0];
-  // let queryURL2 = "https://pokeapi.co/api/v2/pokemon/" + pokeNum[1];
-  // let queryURL3 = "https://pokeapi.co/api/v2/pokemon/" + pokeNum[2];
-  // let queryURL4 = "https://pokeapi.co/api/v2/pokemon/" + pokeNum[3];
 
-  // https://pokeres.bastionbot.org/images/pokemon/25.png
-  // $.ajax({
-  //     url: queryURL,
-  //     method: "GET"
-  //   }).then(function(response) {
-  //     console.log(response);
-  //   });
+//=========================[PokeDex]================================
+ 
 
-  // $.ajax({
-  //     url: queryURL2,
-  //     method: "GET"
-  //   }).then(function(response) {
-  //     console.log(response);
-  //   });
+// capitalization for API request data
+String.prototype.capitalize = function() {
+  return this.charAt(0).toUpperCase() + this.slice(1);
+};
 
-  // $.ajax({
-  //     url: queryURL3,
-  //     method: "GET"
-  //   }).then(function(response) {
-  //     console.log(response);
-  //   });
+// page for displaying pokestats as pulled from API
+const pokeStats = function() {
+  setTimeout(function() {
+    buttonClicked = false;
+    gameCounter();
+    nextRound();
+  }, 1000 * 2);
+  setTimeout(function() {
+    gameState();
+    $(".pokemonName").empty();
+    $(".evolution").empty();
+    $(".generation").empty();
+    $(".infoText").empty();
 
-  // $.ajax({
-  //     url: queryURL4,
-  //     method: "GET"
-  //   }).then(function(response) {
-  //     console.log(response);
-  //   });
-
-  // https://pokeres.bastionbot.org/images/pokemon/25.png
-    // site for pokemon images
+  }, 1000 * 2);
+  let queryURL = "https://pokeapi.co/api/v2/pokemon-species/" + roundAnswer;
+  $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function(response) {
+      console.log(response);
+      // console.log(response.name);
+      // console.log(response.evolves_from_species.name);
+      // console.log(response.flavor_text_entries[2].flavor_text);
+      let infoText;
+      let gen = response.generation.name;
+      $(".generation").text(`From: ${gen.capitalize()}`);
+      $(".pokemonName").text(`It's ${pokeList[roundAnswer]}!`);
+      //displays pre-evolution
+      if (response.evolves_from_species) {
+        preEvolution = response.evolves_from_species.name;
+        $(".evolution").text(`Evolves From: ${preEvolution.capitalize()}`);
+      } else {
+        $(".evolution").text("Evolves From: None");
+      };
+      // makes sure only english infotext is displayed
+      for (let i = 0; i<response.flavor_text_entries.length; i++) {
+        if (response.flavor_text_entries[i].language.name === "en") {
+          infoText = response.flavor_text_entries[i].flavor_text;
+          $(".infoText").text(infoText);
+          return;
+        };
+      };
+      
+      
+    }); 
+};
+//============================================================
+//doc.ready close tag
+});
