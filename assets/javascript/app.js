@@ -4,7 +4,7 @@ let gameStart = false;
 let roundCount = 1;
 
 const gameState = function() {
-  if (gameStart === false) {
+  if (gameStart === false && roundCount <= 10) {
     $(".pregame").show();
     $(".main").hide();
     $(".results").hide();
@@ -20,7 +20,41 @@ const gameState = function() {
       };
   } else if (gameStart === true && roundCount === 11) {
     gameEnd();
+    gameStart = false;
   };
+};
+
+let intervalId;
+let timeCount;
+const timer = () => {
+  timeCount = 30;
+  $(".timer").html(`<h2>Time Remaining: ${timeCount}</h2>`);
+  clearInterval(intervalId);
+  intervalId = setInterval(decrement, 1000);
+};
+
+const decrement = () => {
+  timeCount--;
+  $(".timer").html(`<h2>Time Remaining: ${timeCount}</h2>`);
+  if (timeCount === 0) {
+    stop();
+    $(".comment").html(`<p>You ran out of time!</p>`);
+    $(".pokeImg").removeAttr("id");
+    buttonClicked = true;
+    wrongCounter++;
+    console.log("wrong: " + wrongCounter);
+    displayer();
+    setTimeout(function() {
+      gameState();
+      if (roundCount <= 10) {
+        pokeStats();
+      };
+    }, 1000 * 2);
+  };
+};
+
+const stop = () => {
+  clearInterval(intervalId);
 };
 
 gameState();
@@ -28,6 +62,7 @@ gameState();
 $(".startB").on("click", function() {
   gameStart = true;
   gameState();
+  timer();
   //timer start 
 });
 // some form that lets you check pokemon generations you want
@@ -116,6 +151,7 @@ $(".startB").on("click", function() {
   $(".answer").on("click", function() {
     if (buttonClicked === false) {
       buttonClicked = true;
+      stop();
       $(".pokeImg").removeAttr("id"); //remember to add silhouette back for next question
       let choice = parseInt($(this).attr("id"));
       if (selector[choice]) {
@@ -157,7 +193,7 @@ const pokeStats = function() {
     $(".evolution").empty();
     $(".generation").empty();
     $(".infoText").empty();
-
+    timer();
   }, 1000 * 2);
   let queryURL = "https://pokeapi.co/api/v2/pokemon-species/" + roundAnswer;
   $.ajax({
@@ -193,6 +229,7 @@ const pokeStats = function() {
 };
 //==========================[Results and Reset]==================================
 const gameEnd = function() {
+  stop();
   $(".main").hide();
   $(".pokeStats").hide();
   $(".results").show();
@@ -219,6 +256,7 @@ const gameEnd = function() {
   setTimeout(function() {
     $(".rating").append(ratingQuotes[correctCounter]);
   }, 1000 * 5);
+  // add a reset button! empties out all divs, sets counter back to 1, turns button states back
 };
 
 
