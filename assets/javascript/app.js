@@ -320,7 +320,7 @@ const pokeStats = function() {
       for (let i = 0; i<response.flavor_text_entries.length; i++) {
         if (response.flavor_text_entries[i].language.name === "en") {
           infoText = response.flavor_text_entries[i].flavor_text;
-          $(".infoText").text(infoText);
+          $(".infoText").html(infoText);
           return;
         };
       };
@@ -373,9 +373,11 @@ $(document).on("click", ".restartB", function() {
   gameList2.length = 0;
   gameList.length = 0;
   usedPokeSet.clear();
+  isChecked = true;
   $(".finalScore").empty();
   $(".rating").empty();
   $(".restart").empty();
+  $(".all").removeClass("bevel2");
   $(".region").removeClass("bevel");
   $(".roundsDisplay").removeClass("text-danger text-success");
   $(".roundsDisplay").attr("value", "10");
