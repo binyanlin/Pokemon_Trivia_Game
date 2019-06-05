@@ -26,7 +26,7 @@ $(document).on("click", ".region", function() {
 //on clicking again, have a remove class
 
 let gameStart = false;
-let roundCount = 1;
+let roundCount = 9;
 let totalRounds = 10;
 let buttonClicked = false;
 
@@ -117,7 +117,7 @@ $(document).on("click", ".rightarrow", function() {
 
 $(document).on("click", ".startB", function() {
   if ($(".region").hasClass("bevel")) {
-    totalRounds = $(".roundsDisplay").attr("value");
+    totalRounds = parseInt($(".roundsDisplay").attr("value"));
     // console.log("total rounds: " + totalRounds);
     let chosenRegion = $(".bevel").map(function (element, val) {
       // console.log(element, val);
@@ -209,7 +209,7 @@ $(document).on("click", ".startB", function() {
   };
 
   const gameCounter = () => {
-    if (roundCount <= 10) {
+    if (roundCount <= totalRounds) {
       roundCount++;
       nextRound();
       console.log("round: " + roundCount);
