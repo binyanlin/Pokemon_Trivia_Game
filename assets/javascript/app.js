@@ -88,27 +88,28 @@ const stop = () => {
 gameState();
 
 $(document).on("click", ".startB", function() {
-  let chosenRegion = $(".bevel").map(function (element, val) {
-    console.log(element, val);
-    return val.dataset.region; 
-  });
-  chosenRegion = [...chosenRegion];
-  for (let i = 0; i<chosenRegion.length; i++) {
-    console.log(regionObj[chosenRegion[i]]);
-    gameList2.push(regionObj[chosenRegion[i]]); 
+  if ($(".region").hasClass("bevel")) {
+    let chosenRegion = $(".bevel").map(function (element, val) {
+      console.log(element, val);
+      return val.dataset.region; 
+    });
+    chosenRegion = [...chosenRegion];
+    for (let i = 0; i<chosenRegion.length; i++) {
+      console.log(regionObj[chosenRegion[i]]);
+      gameList2.push(regionObj[chosenRegion[i]]); 
+    };
+    const gameList3 = gameList2.flat();
+    for (let i=0; i<gameList3.length; i++) {
+      gameList.push(gameList3[i]);
+    };
+    console.log(gameList);
+    // console.log(chosenRegion);
+    // console.log([...chosenRegion]);
+    gameStart = true;
+    gameState();
+    nextRound();
+    timer();
   };
-  const gameList3 = gameList2.flat();
-  for (let i=0; i<gameList3.length; i++) {
-    gameList.push(gameList3[i]);
-  };
-  console.log(gameList);
-  // console.log(chosenRegion);
-  // console.log([...chosenRegion]);
-  gameStart = true;
-  gameState();
-  nextRound();
-  timer();
-  //timer start 
 });
 // some form that lets you check pokemon generations you want
 
