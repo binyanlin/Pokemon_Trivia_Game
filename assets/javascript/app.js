@@ -156,8 +156,12 @@ $(document).on("click", ".startB", function() {
       <strong>Just a second!</strong> Don't forget to select at least one Pokemon Generation. 
       You can select as many as you want! Try out the round toggler as well.
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span></button></div>`);
+      <span id="closeButton" aria-hidden="true">&times;</span></button></div>`);
   };
+});
+
+$(document).on("click", "#closeButton", function() {
+  $(".alert").remove();
 });
 
 //=============================[Main Game]====================================
