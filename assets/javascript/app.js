@@ -26,7 +26,7 @@ $(document).on("click", ".region", function() {
 //on clicking again, have a remove class
 
 let gameStart = false;
-let roundCount = 10;
+let roundCount = 1;
 let totalRounds = 10;
 let buttonClicked = false;
 
@@ -87,24 +87,52 @@ const stop = () => {
 
 gameState();
 
+$(document).on("click", ".leftarrow", function() {
+  let val = parseInt($(".roundsDisplay").attr("value"));
+  if (val <= 30 && val >= 10) {
+    val -= 5;
+    $(".roundsDisplay").attr("value", val);
+    $(".roundsDisplay").text(val);
+    if (val === 5) {
+      $(".roundsDisplay").addClass("text-success");
+    } if (val === 25) {
+      $(".roundsDisplay").removeClass("text-danger");
+    };
+  };
+});
+
+$(document).on("click", ".rightarrow", function() {
+  let val = parseInt($(".roundsDisplay").attr("value"));
+  if (val <= 25 && val >= 5) {
+    val += 5;
+    $(".roundsDisplay").attr("value", val);
+    $(".roundsDisplay").text(val);
+    if (val === 30) {
+      $(".roundsDisplay").addClass("text-danger");
+    } if (val === 10) {
+      $(".roundsDisplay").removeClass("text-success");
+    };
+  };
+});
+
 $(document).on("click", ".startB", function() {
   if ($(".region").hasClass("bevel")) {
+    totalRounds = $(".roundsDisplay").attr("value");
+    // console.log("total rounds: " + totalRounds);
     let chosenRegion = $(".bevel").map(function (element, val) {
-      console.log(element, val);
+      // console.log(element, val);
       return val.dataset.region; 
     });
     chosenRegion = [...chosenRegion];
     for (let i = 0; i<chosenRegion.length; i++) {
-      console.log(regionObj[chosenRegion[i]]);
+      // console.log(regionObj[chosenRegion[i]]);
       gameList2.push(regionObj[chosenRegion[i]]); 
     };
     const gameList3 = gameList2.flat();
     for (let i=0; i<gameList3.length; i++) {
       gameList.push(gameList3[i]);
     };
-    console.log(gameList);
-    // console.log(chosenRegion);
-    // console.log([...chosenRegion]);
+    // console.log(gameList);
     gameStart = true;
     gameState();
     nextRound();
@@ -316,6 +344,8 @@ $(document).on("click", ".restartB", function() {
   $(".rating").empty();
   $(".restart").empty();
   $(".region").removeClass("bevel");
+  $(".roundsDisplay").attr("value", "10");
+  $(".roundsDisplay").text("10");
   gameState();
 });
 
