@@ -46,7 +46,7 @@ const gameState = function() {
         $(".main").hide();
         $(".pokeStats").show();
       };
-  } else if (gameStart === true && roundCount === (totalRounds + 1)) {
+  } else if (gameStart === true && roundCount >= (totalRounds + 1)) {
     gameEnd();
     gameStart = false;
   };
@@ -72,7 +72,7 @@ const decrement = () => {
     displayer();
     setTimeout(function() {
       gameState();
-      if (roundCount <= 10) {
+      if (roundCount <= totalRounds) {
         pokeStats();
         wrongCounter++;
         console.log("wrong: " + wrongCounter);
@@ -224,7 +224,7 @@ $(document).on("click", ".startB", function() {
   };
 
   //game start
-  // nextRound();
+  
   // Guess event
   $(".answer").on("click", function() {
     if (buttonClicked === false) {
@@ -245,7 +245,7 @@ $(document).on("click", ".startB", function() {
       // timer that resets everything, increases turn count by 1, and makes next question appear
       setTimeout(function() {
         gameState();
-        if (roundCount <=10) {
+        if (roundCount <=totalRounds) {
         pokeStats();
         };
       }, 1000 * 2);
@@ -340,6 +340,7 @@ const gameEnd = function() {
 // add a reset button! empties out all divs, sets counter back to 1, turns button states back
 $(document).on("click", ".restartB", function() {
   stop();
+  timeCount = "";
   gameStart = false;
   roundCount = 1;
   buttonClicked = false;
