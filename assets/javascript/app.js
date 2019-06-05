@@ -20,6 +20,19 @@ const gameList = [];
 $(document).on("click", ".region", function() {
   $(this).toggleClass("bevel");
 });
+
+let isChecked = true;
+$(document).on("click", ".all", function() {
+  if (isChecked === true) {
+    $(".region").addClass("bevel");
+    $(".all").addClass("bevel2");
+    isChecked = false;
+  } else if (isChecked === false) {
+    $(".region").removeClass("bevel");
+    $(".all").removeClass("bevel2");
+    isChecked = true;
+  };
+});
 //region on click
 //add class
 //turn selected !=selectedgen[i]

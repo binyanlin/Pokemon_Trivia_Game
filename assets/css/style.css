@@ -20,6 +20,11 @@ body {
 .bevel {
   box-shadow: 10px 10px 5px grey;
 }
+
+.bevel2 {
+  box-shadow: 10px 10px 5px grey;
+}
+
 .main {
   height: 100%;
 }
@@ -43,6 +48,12 @@ body {
   width: 250px;
   height: auto;
   border-radius: 50%;
+}
+
+.all {
+  width: 250px;
+  height: auto;
+  border-radius: 60%;
 }
 
 .mx-auto {
