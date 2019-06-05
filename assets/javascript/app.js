@@ -26,7 +26,7 @@ $(document).on("click", ".region", function() {
 //on clicking again, have a remove class
 
 let gameStart = false;
-let roundCount = 1;
+let roundCount = 10;
 let totalRounds = 10;
 let buttonClicked = false;
 
@@ -297,7 +297,7 @@ const gameEnd = function() {
   setTimeout(function() {
     let overallRating = Math.floor(correctCounter/totalRounds * 10);
     $(".rating").append(ratingQuotes[overallRating]);
-    $(".restart").html(`<button type="button" class="btn restartB"><img src="./assets/images/pokeball2_400x400.png"></img><h3 id="restartText"></h3></button>`);
+    $(".restart").html(`<button type="button" class="btn restartB" id="restartBtn"><img src="./assets/images/pokeball2_400x400.png"></img><h3 id="restartText">Restart</h3></button>`);
   }, 1000 * 4);
 };
 
@@ -316,7 +316,6 @@ $(document).on("click", ".restartB", function() {
   $(".restart").empty();
   $(".region").removeClass("bevel");
   gameState();
-
 });
 
 //===============================================================

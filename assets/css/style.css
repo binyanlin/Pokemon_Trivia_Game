@@ -59,3 +59,18 @@ body {
   width: 70%;
   height: 70%;
 }
+
+#restartBtn {
+  position: fixed;
+  top: -60px;
+  right: -60px;
+}
+
+#restartText {
+  position: fixed;
+  top: 150px;
+  right: 80px;
+  color: #FFCE01;
+  text-shadow: -1px 0 #356ABD, 0 1px #356ABD, 1px 0 #356ABD, 0 -1px #356ABD;
+}
+}
