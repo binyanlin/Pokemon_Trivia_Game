@@ -308,11 +308,15 @@ $(document).on("click", ".restartB", function() {
   buttonClicked = false;
   correctCounter = 0;
   wrongCounter = 0;
+  selection.length = 0;
+  gameList2.length = 0;
+  gameList.length = 0;
   $(".finalScore").empty();
   $(".rating").empty();
   $(".restart").empty();
+  $(".region").removeClass("bevel");
   gameState();
-  nextRound();
+
 });
 
 //===============================================================
