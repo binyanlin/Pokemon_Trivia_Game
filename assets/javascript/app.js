@@ -144,20 +144,42 @@ $(document).on("click", ".startB", function() {
       You can select as many as you want! Try out the round toggler as well.
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span></button></div>`);
-      $(".alert").alert('close');
   };
 });
 
 //=============================[Main Game]====================================
 
-  let pokeNum = [];
-  const pokePicker = function() {
-    pokeNum = [];
-    for (let i = 0; i < 4; i++) {
-      // pokeNum.push(1 + Math.floor(Math.random()* 807)); //for all pokemon!
-      pokeNum.push(1 + Math.floor(Math.random()* gameList.length)); 
-    };
+
+let pokeSet = new Set();
+let pokeNum = [];
+const pokePicker = function() {  
+  pokeSet.clear();
+  pokeNum.length = 0;
+  while (pokeSet.size < 5) {
+    let generatedNum = (Math.floor(Math.random()* gameList.length));
+    pokeSet.add(generatedNum);
   };
+  pokeSet.forEach(v => pokeNum.push(v));
+};
+  
+
+
+  // const pokePicker = function() {
+  //   pokeSet.clear();
+  //   for (let i = 0; i < 4; i++) {
+  //     // pokeNum.push(1 + Math.floor(Math.random()* 807)); //for all pokemon!
+  //     let generatedNum = (Math.floor(Math.random()* gameList.length));
+  //     const recursivePick = function() {
+  //       if (pokeSet.has(generatedNum) === false) {
+  //       pokeSet.add(generatedNum);
+  //       } else {
+  //         generatedNum = (Math.floor(Math.random()* gameList.length));
+  //         recursivePick();
+  //       };
+  //     recursivePick();
+  //     };
+  //   };
+  // };
 
   // selects which one is the correct answer for the round
   let selector = [];
