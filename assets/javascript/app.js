@@ -161,27 +161,8 @@ const pokePicker = function() {
   };
   pokeSet.forEach(v => pokeNum.push(v));
 };
-  
 
-
-  // const pokePicker = function() {
-  //   pokeSet.clear();
-  //   for (let i = 0; i < 4; i++) {
-  //     // pokeNum.push(1 + Math.floor(Math.random()* 807)); //for all pokemon!
-  //     let generatedNum = (Math.floor(Math.random()* gameList.length));
-  //     const recursivePick = function() {
-  //       if (pokeSet.has(generatedNum) === false) {
-  //       pokeSet.add(generatedNum);
-  //       } else {
-  //         generatedNum = (Math.floor(Math.random()* gameList.length));
-  //         recursivePick();
-  //       };
-  //     recursivePick();
-  //     };
-  //   };
-  // };
-
-  // selects which one is the correct answer for the round
+// selects which one is the correct answer for the round
   let selector = [];
   const roundSelect = () => {
     selector = [];
@@ -202,19 +183,26 @@ const pokePicker = function() {
     $(".answer4").text(gameList[pokeNum[3]]);
   };
 
-  
+  let usedPokeSet = new Set();
   let roundAnswer;
   // silhouette displayer
   const displayer = function () {
     for (i = 0; i<selector.length; i++) {
       if (buttonClicked === false && selector[i]) {
         let pokeNumber = pokeList.indexOf(gameList[pokeNum[i]]);
-        $(".pokePic").html(`<img class="pokeImg" src="https://pokeres.bastionbot.org/images/pokemon/${pokeNumber}.png"></img>`);
-        // in case of 404 error, replace pokePic with backup URL
-        window.addEventListener("error", function() {
-          $(".pokePic").html(`<img class="pokeImg" src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/${pokeNumber}.png"></img>`);
-        }, true);
-        roundAnswer = pokeNumber;
+        if (usedPokeSet.has(pokeNumber) === false) {
+          usedPokeSet.add(pokeNumber)
+          $(".pokePic").html(`<img class="pokeImg" src="https://pokeres.bastionbot.org/images/pokemon/${pokeNumber}.png"></img>`);
+          // in case of 404 error, replace pokePic with backup URL
+          window.addEventListener("error", function() {
+            $(".pokePic").html(`<img class="pokeImg" src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/${pokeNumber}.png"></img>`);
+            $(".pokeImg").attr("id", "silhouette");
+          }, true);
+          roundAnswer = pokeNumber;
+  //if the pokemon has been used before, goes back to function that rerolls the round without advancing game state     
+        } else if (usedPokeSet.has(pokeNumber)) {
+            nextRound();
+        };
       } else if (buttonClicked === true && selector[i]) {
         $(".comment").append(`The pokemon is ${gameList[pokeNum[i]]}\!`);
       };
@@ -371,6 +359,7 @@ $(document).on("click", ".restartB", function() {
   selection.length = 0;
   gameList2.length = 0;
   gameList.length = 0;
+  usedPokeSet.clear();
   $(".finalScore").empty();
   $(".rating").empty();
   $(".restart").empty();
