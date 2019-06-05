@@ -11,53 +11,53 @@
 <body>
     <div class="pregame mx-5 py-2">
         <!-- <div class="title text-center py-2"><h1>Pokemon Trivia Game!</h1></div> -->
-        <div class="title">
-            <img class="mx-auto" src="./assets/images/pokemon_trivia_title.png"/>
+        <div class="title1">
+            <img class="mx-auto title" src="./assets/images/pokemon_trivia_title.png"/>
         </div>
         <div class="info mb-3 text-center">Test your pokemon knowledge! Select the pokemon generations you want to include in the game!</div>
-        <div class="row row1 mx-auto px-4 text-center">
+        <div class="row row1 px-4 text-center">
             <button type="button" class="col-sm btn">
-                <img class="region kanto" src="./assets/images/gen1_kanto.jpg"></img>
+                <img class="region kanto" data-region="kanto" src="./assets/images/gen1_kanto.jpg"></img>
                 <p class="regionName">Kanto Region: Gen 1</p>
             </button>
             <button type="button" class="col-sm btn">
-                <img class="region johto" src="./assets/images/gen2_johto.jpg"></img>
+                <img class="region johto" data-region="johto" src="./assets/images/gen2_johto.jpg"></img>
                 <p class="regionName">Johto Region: Gen 2</p>
             </button>
             <button type="button" class="col-sm btn">
-                <img class="region hoenn " src="./assets/images/gen3_hoenn.jpg"></img>
+                <img class="region hoenn " data-region="hoenn" src="./assets/images/gen3_hoenn.jpg"></img>
                 <p class="regionName">Hoenn Region: Gen 3</p>
             </button>
             <button type="button" class="col-sm btn">
-                <img class="region sinnoh" src="./assets/images/gen4_sinnoh.jpg"></img>
+                <img class="region sinnoh" data-region="sinnoh" src="./assets/images/gen4_sinnoh.jpg"></img>
                 <p class="regionName">Sinnoh Region: Gen 4</p>
             </button>
             <button type="button" class="col-sm btn">
-                <img class="region unova" src="./assets/images/gen5_unova.jpg"></img>
+                <img class="region unova" data-region="unova" src="./assets/images/gen5_unova.jpg"></img>
                 <p class="regionName">Unova Region: Gen 5</p>
             </button>
             <button type="button" class="col-sm btn">
-                <img class="region kalos" src="./assets/images/gen6_kalos.jpg"></img>
+                <img class="region kalos" data-region="kalos" src="./assets/images/gen6_kalos.jpg"></img>
                 <p class="regionName">Kalos Region: Gen 6</p>
             </button>
             <button type="button" class="col-sm btn">
-                <img class="region alola" src="./assets/images/gen7_alola.jpg"></img>
+                <img class="region alola" data-region="alola" src="./assets/images/gen7_alola.jpg"></img>
                 <p class="regionName">Alola Region: Gen 7</p>
             </button>
         </div>
 
         <div class="row">
-            <div class="col-sm"></div>
-            <button type="button" class="btn col-sm arrow leftarrow ml-4 pl-4">
-                <img class="toggle-lower" src="./assets/images/lower_toggle.png"></img>
+            <div class="col-sm col-xs-0"></div>
+            <button type="button" class="btn col-sm arrow leftarrow">
+                <img class="toggle-lower img-fluid" id="arrowL" src="./assets/images/lower_toggle.png"></img>
             </button>
             <div class="col-sm">
-                <h3 class="align-text-bottom text-center pt-4 pl-4">Rounds: <span class="roundsDisplay">10 </span></h3>
+                <h3 class="align-text-bottom text-center pt-4">Rounds: <span class="roundsDisplay">10 </span></h3>
             </div>
-            <button type="button" class="btn col-sm arrow rightarrow mr-4 pr-4">
-                <img class="toggle-higher" src="./assets/images/higher_toggle.png"></img>
+            <button type="button" id="arrowH" class="btn col-sm arrow rightarrow">
+                <img class="toggle-higher img-fluid" src="./assets/images/higher_toggle.png"></img>
             </button>
-            <div class="col-sm"></div>
+            <div class="col-sm col-xs-0"></div>
         </div>
 
         <div class="row">
@@ -68,9 +68,11 @@
 
     </div>
 
-    <div class="main mx-5 py-2">
-        <div class="title2"><h1>Who's That Pokemon?</h1></div>
-
+    <div class="main mx-5 py-2 text-center">
+        <!-- <div class="title2"><h1>Who's That Pokemon?</h1></div> -->
+        <div class="title2">
+            <img class="mx-auto title" src="./assets/images/who_dat_pokemon.png"/>
+        </div>
         <div class="timer">
             <h3>Time remaining: <span class="counter"></span></h3>
         </div>
@@ -78,17 +80,23 @@
         <div class="question"></div>
         <div class="pokePic"></div>
 
-        <button type="button" class="answer answer1 btn btn-secondary" id="0"></button>
-        <button type="button" class="answer answer2 btn btn-secondary" id="1"></button>
-        <button type="button" class="answer answer3 btn btn-secondary" id="2"></button>
-        <button type="button" class="answer answer4 btn btn-secondary" id="3"></button>
-        
+        <div class="row">
+            <div class="col-sm"></div>
+            <button type="button" class="col-sm m-4 answer answer1 btn alert-primary" id="0"></button>
+            <button type="button" class="col-sm m-4 answer answer2 btn alert-secondary" id="1"></button>
+            <button type="button" class="col-sm m-4 answer answer3 btn alert-info" id="2"></button>
+            <button type="button" class="col-sm m-4 answer answer4 btn alert-danger" id="3"></button>
+            <div class="col-sm"></div>
+        </div>
+
         <div class="comment"></div>
 
     </div>
     
-    <div class="pokeStats mx-5 py-2">
-
+    <div class="pokeStats mx-5 py-2 text-center">
+        <div class="title2">
+            <img class="mx-auto title" src="./assets/images/who_dat_pokemon.png"/>
+        </div>
         <h1 class="pokemonName"></h1>
         <div class="pokePic"></div>
         <div class="evolution"></div>
@@ -96,14 +104,26 @@
         <div class="infoText"></div>
     </div>
 
-    <div class="results mx-5 py-2">
-        <div class="title3"></div>
-        <div class="finalScore"></div>
-        <div class="profOak"></div>
-        <div class="rating">
-
+    <div class="results mx-5 py-2 text-center">
+        <div class="title2">
+            <img class="mx-auto" src="./assets/images/results_title.png"/>
         </div>
-        <div class="restart"></div>
+        <div class="row mt-2">
+            <div class="col-sm1"></div>
+            <div class="col-sm finalScore"></div>
+            <div class="col-sm rating justify-content-start"></div>
+            <div class="col-sm1"></div>
+        </div>
+        
+        <div class="row">
+            <div class="col-sm"></div>
+            <div class="col-sm profOak"></div>
+            <div class="col-sm restart"></div>
+            <div class="col-sm"></div>
+        </div>
+        
+        
+
     </div>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

@@ -13,6 +13,9 @@ body {
   height: 100%;
 }
 
+.bevel {
+  box-shadow: 10px 10px 5px grey;
+}
 .main {
   height: 100%;
 }
@@ -35,17 +38,24 @@ body {
 .region {
   width: 250px;
   height: auto;
-  border-radius: 80%;
+  border-radius: 50%;
 }
 
-/* .leftarrow {
-  position: absolute;
-  left: 250px;
-  bottom: 20px;
+.mx-auto {
+  width: auto;
+  display: block;
 }
 
-.rightarrow {
-  position: absolute;
-  right: 250px;
-  bottom: 20px;
-} */
+.answer {
+  width: 100px !important;
+}
+
+.title {
+  width: 100%;
+  height: auto;
+}
+
+.profOak {
+  width: 70%;
+  height: 70%;
+}
