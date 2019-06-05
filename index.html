@@ -14,7 +14,7 @@
         <div class="title1">
             <img class="mx-auto title" src="./assets/images/pokemon_trivia_title.png"/>
         </div>
-        <div class="info mb-3 text-center">Test your pokemon knowledge! Select the pokemon generations you want to include in the game!</div>
+        <div class="info mb-3 text-center">Test your pokemon knowledge! Select the pokemon generations you want to include in the game! You can set the total number of rounds with the left and right arrows.</div>
         <div class="row row1 px-4 text-center">
             <button type="button" class="col-sm btn">
                 <img class="region kanto" data-region="kanto" src="./assets/images/gen1_kanto.jpg"></img>
@@ -61,10 +61,13 @@
         </div>
 
         <div class="row">
-            <button type="button" class="btn col-sm startButton text-center">
-                <h3 class="startB">Start Button</h3>
+            <div class="col-sm-4"></div>
+            <button type="button" class="btn col-sm startButton alert-warning text-center">
+                <h3 class="startB pt-2">Start Game!</h3>
             </button>
+            <div class="col-sm-4"></div>
         </div>
+        <div class="row alert text-center align-items-center"></div>
 
     </div>
 
@@ -100,7 +103,7 @@
         <h1 class="pokemonName"></h1>
         <div class="pokePic"></div>
         <div class="evolution text-capitalize"></div>
-        <div class="generation text-uppercase"></div>
+        <div class="generation"></div>
         <div class="infoText"></div>
     </div>
 

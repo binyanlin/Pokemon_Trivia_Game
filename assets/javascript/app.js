@@ -26,7 +26,7 @@ $(document).on("click", ".region", function() {
 //on clicking again, have a remove class
 
 let gameStart = false;
-let roundCount = 9;
+let roundCount = 1;
 let totalRounds = 10;
 let buttonClicked = false;
 
@@ -137,9 +137,16 @@ $(document).on("click", ".startB", function() {
     gameState();
     nextRound();
     timer();
+  } else {
+    $(".alert").html(
+      `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong>Just a second!</strong> Don't forget to select at least one Pokemon Generation. 
+      You can select as many as you want! Try out the round toggler as well.
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span></button></div>`);
+      $(".alert").alert('close');
   };
 });
-// some form that lets you check pokemon generations you want
 
 //=============================[Main Game]====================================
 
@@ -259,7 +266,7 @@ const pokeStats = function() {
     buttonClicked = false;
     gameCounter();
     nextRound();
-  }, 1000 * 2);
+  }, 1000 * 5);
   setTimeout(function() {
     gameState();
     $(".pokemonName").empty();
@@ -267,7 +274,7 @@ const pokeStats = function() {
     $(".generation").empty();
     $(".infoText").empty();
     timer();
-  }, 1000 * 2);
+  }, 1000 * 5);
   let queryURL = "https://pokeapi.co/api/v2/pokemon-species/" + roundAnswer;
   $.ajax({
       url: queryURL,
@@ -332,6 +339,7 @@ const gameEnd = function() {
 
 // add a reset button! empties out all divs, sets counter back to 1, turns button states back
 $(document).on("click", ".restartB", function() {
+  stop();
   gameStart = false;
   roundCount = 1;
   buttonClicked = false;
@@ -344,6 +352,7 @@ $(document).on("click", ".restartB", function() {
   $(".rating").empty();
   $(".restart").empty();
   $(".region").removeClass("bevel");
+  $(".roundsDisplay").removeClass("text-danger text-success");
   $(".roundsDisplay").attr("value", "10");
   $(".roundsDisplay").text("10");
   gameState();
