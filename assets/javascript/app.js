@@ -88,7 +88,7 @@ const decrement = () => {
       if (roundCount <= totalRounds) {
         pokeStats();
         wrongCounter++;
-        console.log("wrong: " + wrongCounter);
+        // console.log("wrong: " + wrongCounter);
       };
     }, 1000 * 2);
   };
@@ -151,8 +151,8 @@ $(document).on("click", ".startB", function() {
     nextRound();
     timer();
   } else {
-    $(".alert").html(
-      `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    $(".alertInfo").html(
+      `<div class="alert mt-3 alert-warning alert-dismissible fade show" role="alert">
       <strong>Just a second!</strong> Don't forget to select at least one Pokemon Generation. 
       You can select as many as you want! Try out the round toggler as well.
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -262,11 +262,11 @@ const pokePicker = function() {
       if (selector[choice]) {
         $(".comment").html(`<p>Correct!<p>`);
         correctCounter++;
-        console.log("right: " + correctCounter);
+        // console.log("right: " + correctCounter);
       } else {
         $(".comment").html(`<p>You are wrong!</p>`);
         wrongCounter++;
-        console.log("wrong: " + wrongCounter);
+        // console.log("wrong: " + wrongCounter);
       };
       displayer();
       // timer that resets everything, increases turn count by 1, and makes next question appear
@@ -307,10 +307,7 @@ const pokeStats = function() {
       url: queryURL,
       method: "GET"
     }).then(function(response) {
-      console.log(response);
-      // console.log(response.name);
-      // console.log(response.evolves_from_species.name);
-      // console.log(response.flavor_text_entries[2].flavor_text);
+      // console.log(response);
       let infoText;
       let gen = response.generation.name;
       $(".generation").text(`From: ${gen.capitalize()}`);

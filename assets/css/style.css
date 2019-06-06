@@ -88,4 +88,7 @@ body {
   color: #FFCE01;
   text-shadow: -1px 0 #356ABD, 0 1px #356ABD, 1px 0 #356ABD, 0 -1px #356ABD;
 }
+
+.btn:focus {
+  outline: none !important;
 }
