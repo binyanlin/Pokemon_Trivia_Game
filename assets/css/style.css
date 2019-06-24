@@ -25,6 +25,9 @@ body {
   box-shadow: 10px 10px 5px grey;
 }
 
+.timer {
+  min-height: 48px;
+}
 .main {
   height: 100%;
 }
@@ -34,6 +37,13 @@ body {
   height: auto;
 }
 
+.pokePic {
+  min-height: 300px;
+}
+
+.pokemonName {
+  min-height: 48px;
+}
 .pregame {
   z-index: 5;
 }
@@ -67,7 +77,7 @@ body {
 
 .title {
   width: 100%;
-  height: auto;
+  height: 90%;
 }
 
 .profOak {
