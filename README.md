@@ -7,3 +7,5 @@ This app was a practice of using AJAX calls to access the pokemon API for inform
 ![Region Select Page](https://i.imgur.com/GOpCDvc.png)
 
 ![Who's That Pokemon?](https://i.imgur.com/P5oNTmA.png)
+
+![Professor Oak's Rating](https://i.imgur.com/Rq6HAUj.png)
