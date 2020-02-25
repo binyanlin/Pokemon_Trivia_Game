@@ -1,4 +1,4 @@
-# Pokemon_Trivia_Game
+# Who's That Pokemon?!
 
 https://binyanlin.github.io/Pokemon_Trivia_Game/
 
